@@ -1,6 +1,36 @@
 body{
     overflow-x: hidden;
 }
+
+.container-header_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-header_btn-voltar{
+    margin: 1rem;
+    padding: 0.5rem;
+    width: 10rem;
+    border-color: var(--color02);
+    border-radius: 5rem;
+    background: none;
+    font-weight: 700;
+    
+    transition-duration: 0.2s;
+}
+
+.container-header_btn-voltar i{
+    margin-right: 0.5rem;
+ }
+
+ /* Mudança de Cor do botão ao passar o cursor por cima */
+.container-header_btn-voltar:hover{
+    border-color: none;
+    background-color: var(--color02);
+    color: var(--color01);
+}
+
 /* Cabeçalho */
 .cabecalho {
     width: 100vw;
@@ -29,6 +59,7 @@ body{
 
 .cabecalho__botao i {
     margin-right: 0.5rem;
+    
 }
 
 .cabecalho__botao--voltar:hover {
@@ -291,6 +322,7 @@ body{
     margin-bottom: 1rem; /* Margem inferior */
     border-bottom: 0.2rem solid #eaeaea; /* Linha abaixo */
     padding-bottom: 0.5rem; /* Espaçamento interno abaixo */
+    text-align: left;
 }
 
 /* Estilo para os subtítulos h3 */
@@ -300,6 +332,7 @@ body{
     color: #444; /* Cor um pouco mais clara */
     margin-top: 1.5rem; /* Margem superior */
     margin-bottom: 0.5rem; /* Margem inferior */
+    text-align: left;
 }
 
 /* Estilo para listas não ordenadas */
@@ -307,6 +340,7 @@ body{
     list-style-type: disc; /* Marcadores em forma de disco */
     margin-left: 2rem; /* Margem à esquerda */
     color: #555; /* Cor do texto */
+    text-align: left;
 }
 .modal__conteudo p{
     font-size: 1.4rem;
