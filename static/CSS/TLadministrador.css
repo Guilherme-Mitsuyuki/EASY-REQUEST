@@ -86,7 +86,11 @@ header {
   width: auto;
   height: 2.5rem;
 }
-
+#menu-toggle:checked + .menu-icon + .menu {
+  display: flex;
+  z-index: +10000;
+  margin-top: 2.5rem;
+}
 .button {
   display: flex;
   align-items: center;
