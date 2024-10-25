@@ -52,6 +52,7 @@ nav{
   height: 6vh;
   display: flex;
   align-items: center;
+  margin-top: 1rem;
 }
 
 .container-header_btn-voltar{
@@ -77,40 +78,50 @@ nav{
 }
 
 /* Estilo da Escolha de Funcionario */
-main{
+.form_select-user{
   width: 100vw;
-  height: 74vh;
+  height: 60vh;
   overflow-x: auto;
   position: relative;
 }
 
+/* estilo da barra de rolagem */
+::-webkit-scrollbar {
+  background-color: transparent;
+}
+
 .caixa-opcao {
-    padding: 8px;
-    margin: 1rem 3rem 2rem 3rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    color: var(--color01);
-    background-color: var(--color06);
-    border: none;
-    border-radius: 5rem;
-    box-shadow:  5px 8px 18px var(--color02);
-    transition-duration: 0.2s;
+  max-height: 10rem;
+  padding: 1rem 6rem 1rem 1rem;
+  margin: 1rem 2rem 1rem 2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--color01);
+  background-color: var(--color06);
+  border: none;
+  border-radius: 5rem;
+  box-shadow: 0px -1px 7px rgba(20,23,53,0.3);
+  transition-duration: 0.2s;
+  border: 2px solid transparent;
     
 }
+
 
 /* Transição do select */
 .caixa-opcao.selected {
   border: 2px solid var(--color03);
   box-shadow: none;
+  transform: scale(1.1);
 }
 
 .caixa-opcao img{
-  width: auto;
-  height: 7rem;
-  padding: 0.5rem;
-  border-radius: 100%;
+    width: 6rem;
+    height: 6rem;
+    padding: 0.5rem;
+    border-radius: 100%;
+    object-fit: cover;
 }
 
 .opcao_user{
@@ -120,68 +131,43 @@ main{
   align-items: center;
   font-size: 1.5rem;
 }
-.opcao_user p{
-  background-color: var(--color05);
-  text-align: center;
-  margin-bottom: 0.5rem;
-  padding: 0.5rem 2rem 0.5rem 2rem;
-  border-radius: 5rem;
-  font-weight: 600;
-}
-
-
-
-.status_disponivel{
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  background-color: var(--colorGreen);
-  font-size: 1.5rem;
-  border-radius: 0.5rem;
-  display: none;
-}
-
-.status_n-disponivel{
-  padding: 0.5rem 1rem 0.5rem 1rem;
-  background-color: var(--colorRed);
-  border-radius: 0.5rem;
-  font-size: 1.5rem;
-  text-align: center;
-  
-}
 
 /* Estilo da Escolha da urgencia/emergencia */
 
 .form_btn-emergencia{
-  width: 100vw;
-  height: 18vh;
-  position: fixed;
-  bottom: 0;
-  z-index: 1;
-  background-color: var(--color06);
-  border-top-left-radius: 4rem ;
-  border-top-right-radius: 4rem;
-  color: var(--color01);
+    width: 100vw;
+    height: 33vh;
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+    background-color: var(--color06);
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    color: var(--color01);
+    align-content: center;
   
 }
 
 .form_btn-emergencia__titulo{
-  margin: 1rem 0rem 0rem 3rem;
-  font-size: 1.2rem;
+  margin-left: 2rem;
+  font-size: 1.5rem;
 }
 
 .botoes{
-  display: flex;
-  width: 100vw;
-  align-items: center;
-  justify-content: space-around;
-  margin-top: 1rem;
+    display: flex;
+    width: 100vw;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 2rem;
 
 }
 
 .opcaoUrgencia{
-    padding: 1rem;
+    padding: 1.4rem;
     border: solid 2px var(--color01);
     border-radius: 1rem;
     transition-duration: 0.2s;
+    font-size: 1.1rem;
 }
 
 .opcaoUrgencia.selected{
@@ -193,21 +179,23 @@ main{
 /* Estilo do botão 'Enviar Solicitação' */
 .container_btn-enviar{
   text-align: center;
+  padding-left: 1rem;
 }
 
 .btn-enviar{
-    background-color: var(--color03); 
-    color: var(--color01); 
-    width: 20rem;
-    padding: 0.9rem;
-    text-align: center;
-    border: none;
-    border-radius: 50px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    cursor: pointer;
-    margin: 1rem 10rem 0rem 10rem;
-    transition-duration: 0.2s;
+  background-color: var(--color03);
+  color: var(--color01);
+  width: 20rem;
+  padding: 1.5rem;
+  text-align: center;
+  border: none;
+  border-radius: 50px;
+  font-size: 1.6rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition-duration: 0.2s;
+  
 }
 
 .btn-enviar:hover{
@@ -217,13 +205,35 @@ main{
 }
 
 /* ----------RESPONSIVIDADE----------- */
+@media (min-width:800px){
+  .form_select-user{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0rem 5rem;
+    justify-content: space-between;
+    align-items: center;
+    align-content: space-evenly;
 
-@media (min-width: 360px){
-  .status_n-disponivel{
-    padding: 0.4rem 0.5rem 0.4rem 0.5rem;
-    
-  }  
-  .opcaoUrgencia{
-   font-size: 1.2rem;
-    }
+  }
+  .opcaoUrgencia {
+    padding: 2rem;
+    font-size: 1.5rem;
+  }
+
+  .form_btn-emergencia__titulo {
+    margin-left: 4rem;
+  }
+}
+
+@media (min-width:1000px){
+  .form_select-user{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 0rem 5rem;
+
+  }
+
+  .form_btn-emergencia__titulo {
+    margin-left: 7rem;
+  }
 }

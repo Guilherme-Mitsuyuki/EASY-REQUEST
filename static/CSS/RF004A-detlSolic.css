@@ -4,11 +4,12 @@ body{
 a{
     text-decoration: none
 }
-nav{
+nav {
     width: 100vw;
-    height: 5vh;
+    height: 11vh;
     display: flex;
     justify-content: space-between;
+    align-items: flex-end;
 }
 
 .container-header_btn{
@@ -45,21 +46,25 @@ nav{
 /* Seção de detalhes da solicitação */
 .detalhes-solicitacao {
     width: 100vw;
-    height: 55rem;
+    min-height: 55rem; 
+    max-height: 58rem;
+    overflow-y: auto; 
     background-color: var(--color06);
     margin-bottom: 0;
     position: absolute;
     bottom: 0;
     left: 0;
 
-    border-top-left-radius: 10rem;  
-    border-top-right-radius: 10rem; 
+    border-top-left-radius: 2rem;  
+    border-top-right-radius: 2rem; 
     padding: 1.5rem;
 
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: space-evenly;
+    box-shadow: 1px -3px 10px rgba(0, 0, 0, 0.5);
+    overflow-wrap: break-word;
 }
 
 
@@ -68,49 +73,77 @@ nav{
 }
 
 .detalhes-solicitacao__titulo {
-    font-size: 4rem;
+    font-size: 3rem;
     color: var(--color05);
     margin-bottom: 0.5rem;
+    overflow-wrap: break-word; 
 }
 
 .detalhes-solicitacao__autor {
     font-size: 3.5rem;
     color: var(--color01);
+    overflow-wrap: break-word; /* Quebra palavras longas */
 }
 
 .detalhes-solicitacao__divisor {
     border: none;
     border-top: 2px solid var(--color05);
     margin: 1.8rem 0;
+
 }
 
 .detalhes-solicitacao__corpo {
     padding: 0 3rem;
     font-size: 2.3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     text-align: justify;
+    overflow-wrap: break-word; /* Quebra palavras longas */
 }
 
 .detalhes-solicitacao__rotulo-descricao {
     font-weight: bold;
     color: var(--color01);
-    font-size: 3rem;
+    font-size: 2rem;
+    overflow-wrap: break-word; /* Quebra palavras longas */
 }
 
 .detalhes-solicitacao__texto-descricao {
+    max-width: 60rem;
     margin-bottom: 1rem;
     line-height: 1.6;
     color: var(--color04);
     text-overflow: ellipsis;
     font-size: 1.7rem;
+    overflow-wrap: break-word; /* Quebra palavras longas */
 }
-
+.detalhes-solicitacao__corpo img{
+    align-items: center;
+}
+.detalhes-solicitacao img{
+    max-width: 40rem;
+    display: block;
+    height: auto;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
 /* Estilos dos botões */
+.container-btn{
+    width: 100vw;
+    height: auto;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+}
 .botao {
     display: inline-block;
-    width: 30rem;
+    width: 25rem;
     padding: 1.2rem;
     text-align: center;
-    border-radius: 50px;
+    border-radius: 2rem;
     font-size: 1.6rem;
     font-weight: bold;
     text-decoration: none;
@@ -120,6 +153,18 @@ nav{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.botao-reencaminhar{
+    background-color: var(--color05);
+    border: 2px solid var(--color05); 
+    color: var(--color01); 
+}
+.botao-reencaminhar:hover{
+    background-color: transparent;
+    border: 2px solid var(--color05); 
+    color: var(--color05); 
+    box-shadow: 0px 8px 15px rgba(224, 223, 163, 0.2); 
+    transform: scale(1.00); 
 }
 .botao-cadastro {
     background-color: transparent;
@@ -132,26 +177,143 @@ nav{
     background-color: var(--color03); 
     color: var(--color06); 
     box-shadow: 0px 8px 15px rgba(224, 223, 163, 0.2); 
-    transform: scale(1.05); 
+    transform: scale(1.00); 
+}
+
+.container-botao{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 2rem;
+}
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    overflow: auto; /* Ativar rolagem se necessário */
+    background-color: rgb(0,0,0); /* Cor de fundo */
+    background-color: rgba(0,0,0,0.4); /* Fundo preto com opacidade */
+}
+
+.modal__conteudo {
+    background-color: #fefefe;
+    margin: 15% auto; /* Margens automáticas para centralizar */
+    padding: 2rem;
+    border: 1px solid #888;
+    width: 80%; /* Largura do modal */
+}
+
+.modal__fechar {
+    color: #aaa;
+    float: right;
+    font-size: 2.8rem;
+    font-weight: bold;
+}
+
+.modal__fechar:hover,
+.modal__fechar:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 
+/* Estilos para o modal */
+.modal__conteudo {
+    background-color: #fff; /* Fundo branco */
+    border-radius: 0.8rem; /* Bordas arredondadas */
+    box-shadow: 0 0.4rem 2rem rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 2rem; /* Espaçamento interno */
+}
+/* Estilo para os títulos h2 */
+.modal__conteudo h2 {
+    font-family: 'Georgia', serif; /* Fonte clássica */
+    font-size: 2.4rem; /* Tamanho do texto */
+    color: #333; /* Cor escura */
+    margin-top: 1.5rem; /* Margem superior */
+    margin-bottom: 1rem; /* Margem inferior */
+    border-bottom: 0.2rem solid #eaeaea; /* Linha abaixo */
+    padding-bottom: 0.5rem; /* Espaçamento interno abaixo */
+}
+
+/* Estilo para os subtítulos h3 */
+.modal__conteudo h3 {
+    font-family: 'Georgia', serif; /* Fonte clássica */
+    font-size: 2rem; /* Tamanho do texto */
+    color: #444; /* Cor um pouco mais clara */
+    margin-top: 1.5rem; /* Margem superior */
+    margin-bottom: 0.5rem; /* Margem inferior */
+}
+
+/* Estilo para listas não ordenadas */
+.modal__conteudo ul {
+    list-style-type: disc; /* Marcadores em forma de disco */
+    margin-left: 2rem; /* Margem à esquerda */
+    color: #555; /* Cor do texto */
+}
+.modal__conteudo p{
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+/* Estilo para itens da lista */
+.modal__conteudo ul li {
+    margin-bottom: 0.5rem; /* Espaçamento entre itens */
+    font-size: 1.4rem;
+}
+
+/* Estilo para separadores (hr) */
+.modal__conteudo hr {
+    border: 1px solid #eaeaea; /* Linha sutil */
+    margin: 20px 0; /* Margem vertical */
+}
 
 /* Responsividade */
 @media (max-width: 700px) {
-    .detalhes-solicitacao {
-
+    .detalhes-solicitacao__corpo img{
+        align-items: center;
+    }
+    .detalhes-solicitacao img{
+        max-width: 30rem;
+        height: auto;
+        object-fit: cover;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
     }
 
     .detalhes-solicitacao__titulo {
         font-size: 1.5rem;
     }
 
-    .detalhes-solicitacao__texto-descricao {
-        font-size: 0.9rem;
-    }
+
     .detalhes-solicitacao{
         max-width: 70rem;
+    }
+    .container-botao{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    .detalhes-solicitacao__titulo, .detalhes-solicitacao__rotulo-descricao{
+        font-size: 2rem;
+    }
+    .detalhes-solicitacao__autor,.detalhes-solicitacao__texto-descricao {
+        font-size: 1.8rem;
+    }
+    .container-btn{
+        width: 100vw;
+        height: auto;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        justify-content: center;
+        flex-direction: column;
     }
 }
 /* ---------------TRANSIÇÃO------------------- */

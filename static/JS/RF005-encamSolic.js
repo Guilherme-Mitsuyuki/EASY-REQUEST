@@ -13,29 +13,44 @@ function mostraFuncionarios(){
           var div = document.createElement('div');
 
           div.className = 'caixa-opcao';
-          div.id = `${retorna_funcionarios[x][2]}`
-          div.setAttribute('onclick', `selecionarFuncionario('${retorna_funcionarios[x][2]}');`);
-          div.innerHTML = `<figure><img src="https://pics.craiyon.com/2023-06-27/287f2a60c2e74386b5a89c517eb527dc.webp" alt="Imagem de Perfil"></figure>
-                            <div class="opcao_user"><p>${retorna_funcionarios[x][0]}</p>${retorna_funcionarios[x][1]}</div>
-                            <p class="status_disponivel">Disponível</p>
-                            <p class="status_n-disponivel">Não Disponível</p>`;
+          div.id = `${retorna_funcionarios[x][1]}`
+          div.setAttribute('onclick', `selecionarFuncionario('${retorna_funcionarios[x][1]}');`);
+          if (retorna_funcionarios[x][2]) {
+            div.innerHTML = `<figure><img src="${retorna_funcionarios[x][2]}" alt="Foto de Perfil"></figure>
+                            <div class="opcao_user">${retorna_funcionarios[x][0]}</div>`;
+          }else{
+            div.innerHTML = `<figure><img src="https://st4.depositphotos.com/11574170/25191/v/450/depositphotos_251916955-stock-illustration-user-glyph-color-icon.jpg" alt="Foto de Perfil"></figure>
+            <div class="opcao_user">${retorna_funcionarios[x][0]}</div>`;
+          }
+
           divFuncionarios.append(div);
         }
     },
     error: function(){
-        alert(')X ERROOOOOOOOOO X(');
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Falha no Encaminhamento!",
+        showConfirmButton: false,
+        timer: 3500
+      });
     }
 });
 }
 
-function selecionarFuncionario(id_funcionario){
-  if (funcionarioSelecionado == id_funcionario) {
-    funcionarioSelecionado = '';
-    document.getElementById(`${id_funcionario}`).classList.remove('selected');
+function selecionarFuncionario(id_funcionario) {
+  // Se já houver um funcionário selecionado, remove a classe 'selected' dele
+  if (funcionarioSelecionado) {
+    document.getElementById(`${funcionarioSelecionado}`).classList.remove('selected');
   }
-  else{
+
+  // Se o funcionário clicado for diferente do atualmente selecionado, adiciona a classe
+  if (funcionarioSelecionado !== id_funcionario) {
     funcionarioSelecionado = id_funcionario;
     document.getElementById(`${id_funcionario}`).classList.add('selected');
+  } else {
+    // Se o funcionário clicado já estiver selecionado, desmarca ele
+    funcionarioSelecionado = '';
   }
   console.log(funcionarioSelecionado)
 }
@@ -70,10 +85,25 @@ function realizarEncaminhamento(id_solicitacao) {
     data: JSON.stringify(dados),
     contentType: 'application/json',
     success: function(){
-        window.location.href = '/RF006';
+      Swal.fire({
+        icon: "success",
+        title: "Perfeito",
+        text: "Serviço Encaminhado!",
+        showConfirmButton: false,
+        timer: 2500
+      });
+      setTimeout(() => {
+        window.location.href = '/RF004';
+      }, 2500);
     },
     error: function(){
-        alert("ERRO AO CADASTRAR!")
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Falha no Encaminhamento!",
+        showConfirmButton: false,
+        timer: 3500
+      });
     }
 
   })

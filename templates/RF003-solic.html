@@ -12,7 +12,7 @@
         <!-- Scripts JavaScript: Carregamento dos arquivos de script da página -->
         <script defer src="/static/JS/RF003-solic.js"></script>
         <script defer src="/static/JS/funcao-data.js"></script>
-        
+        <script defer src="/static/JS/funcao-voltar.js"></script>
         <!-- Biblioteca de ícones do Font Awesome para uso de ícones na página -->
         <script src="https://kit.fontawesome.com/e9b74fb3c4.js" crossorigin="anonymous"></script>
         <!-- Biblioteca jQuery para facilitar o uso de Ajax e manipulação de DOM -->
@@ -27,23 +27,10 @@
             <!-- Contêiner do cabeçalho com botão de voltar e data atual -->
             <section class="container-header" id="container-header">
                 <div class="container-header_btn">
-                    <button class="container-header_btn-voltar" href=''><i class="fa-solid fa-arrow-left"></i>Voltar</button>
-                </div>
-                <div class="horas"></div>
-                    <h2 class="saudacao" id="saudacao"></h2>
-                </div>
-                <div class="container-header_data">
-                    <p class="dia-semana" id="dia-semana">Qui</p><p class="dia" id="dia">10</p><p class="mes" id="mes">Set</p>
+                    <button class="container-header_btn-voltar" onclick="funcVoltar('solicitacao')"><i class="fa-solid fa-arrow-left"></i>Voltar</button>
                 </div>
             </section>
-            <!-- Área de perfil do usuário com foto, nome e cargo -->
-            <section class="container-header-user" id="container-header-user">
-                <figure><img src="https://st4.depositphotos.com/11574170/25191/v/450/depositphotos_251916955-stock-illustration-user-glyph-color-icon.jpg" alt="Imagem de Perfil"></figure>
-                <div class="container-header-user_info">
-                    <h2 class="container-header-user_nome">{{campo_nome}}</h2>
-                    <p class="container-header-user_cargo">{{campo_funcao}}</p>
-                </div>
-            </section>
+           
         </header>
         
         <!-- Conteúdo principal da página -->
@@ -67,16 +54,17 @@
                         <select name="sala" id="sala">
                             <option value="0">Sala</option>
                         </select>
-                    </div>
-                    <!-- Upload de arquivo (opcional) -->
-                    <div class="form_input-arquivo">
-                        <label for="arquivo">Foto (Opcional):</label>
-                        <input type="file" name="arquivo" id="arquivo">
+                         <!-- Upload de arquivo (opcional) -->
+                        <div class="form_input-arquivo">
+                            <label for="arquivo">Foto (Opcional):</label>
+                            <input type="file" name="arquivo" id="arquivo">
+                        </div>
                     </div>
                     <!-- Campo de texto para informações adicionais -->
-                    <div class="form_adendo">
-                        <label for="adendo">Adendo:</label>
-                        <input type="text" id="adendo" name="adendo" placeholder="Digite informações adicionais...">
+                    <div class="form_descricao">
+                        <label for="descricao">Descrição:</label>
+                        <textarea name="descricao" id="descricao" placeholder="Descreva o serviço a ser realizado..."></textarea>
+                        <!-- <input type="text" id="descricao" name="descricao" placeholder="Descreva o serviço a ser realizado..."> -->
                     </div>
                     <!-- Botão de envio da solicitação -->
                     <button type="submit" class="form_btn-enviar" onclick="fazerSolicitacao()">Enviar Solicitação</button>

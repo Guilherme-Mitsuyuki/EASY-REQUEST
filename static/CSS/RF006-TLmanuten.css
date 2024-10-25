@@ -1,21 +1,28 @@
+body{
+    overflow-x: hidden; 
+}
 header{
     width: 100vw;
     height: 18vh;    
+    display: flex;
 }
 
 /* Estilo do cabeçalho */
-.container-cumprimentacao{
+.container-cumprimentacao {
     width: 100vw;
     display: flex;
     justify-content: space-around;
+    align-items: center;
 }
 
 #cumprimentacao{
     align-self: center;
-    font-size: 2rem;
+    font-size: 2.5rem;
     font-weight: lighter;
 }
-
+.info-usuario{
+    display: flex;
+}
 /* Estilo da data */
 .container-header-data{
     margin: 1rem;
@@ -28,6 +35,10 @@ header{
 .data{
     display: flex;
     gap: 0.5rem;
+    font-size: 1.8rem;
+}
+.container-header-user_info {
+  margin-left: 1rem;
 }
 .dia-semana{
     color: var(--color05);
@@ -39,140 +50,173 @@ header{
     width: 100vw;
     display: flex;
     align-items: center;
-    padding: 0rem 0rem 0rem 5rem;
+    padding: 0rem 0rem 0rem 2rem;
+    justify-content: space-between;
 }
 
 .container-header-user img{
-    width: auto;
-    height: 5rem;
+    width: 6rem;
+    height: 6rem;
+    object-fit: cover;  
     border-radius: 100%;
 }
-
+.container-header-user_info{
+  margin-left: 1rem;
+}
 .container-header-user_nome{
     font-size: 2rem;
+    color: var(--color06);
 }
 
 .container-header-user_cargo{
     background-color: var(--color05);
     color: var(--color01);
-    margin-right: 10rem;
     text-align: center;
     padding: 0.4rem;
-    border-radius: 5rem;
-}
-
-/* Estilização da area "Serviço de Hoje" */
-main{
-    width: 100vw;
-    height: 70vh;
-    background-color: var(--color06);
-    border-top-left-radius: 5rem;  
-    border-top-right-radius: 5rem; 
-}
-
-h1{
-    color: var(--color01);
-    display: flex;
-    margin-left: 3rem;
-    padding-top: 2rem;
-}
-
-h1 p{
-    color:var(--color03);
-    margin-left: 0.5rem;
-  
-}
-
-hr{
-    color: var(--color01);
-    margin: 0rem 3rem 0rem 3rem;
-}
-
-/* Estilização "serviço a ser feito" */
-
-.container-servico{
-    margin: 1rem 1rem 0rem 1rem;
-    height: 45%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    
-}
-
-.servico{
-    background-color: var(--color01);
-    border-radius: 1rem;
-    height: 35%;
-    margin-bottom: 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    font-size: 1.5rem;
-}
-
-.local{
-    font-weight: bold;
-}
-
-.servico_urgencia{
-    display: flex;
-    align-items: center;
-    gap: 2rem;
-}
-
-.urgencia{
-    border: var(--color02) solid 0.1rem;
     border-radius: 0.5rem;
-    padding: 1rem;
+    font-size: 1.2rem;
 }
 
-.servico_urgencia i{
-    color: var(--color05);
-    border: var(--color05) solid 0.2rem;
-    padding: 0.5rem;
-    border-radius: 5rem ;
-    transition-duration: 0.2s;
-}
-
-.servico_urgencia i:hover{
-   font-size: 2rem;
-}
-
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 4rem; /* Largura inicial do botão */
+    height: 4rem;
+    border: none;
+    border-radius: 50%;
+    margin: auto;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: var(--color05);
+    margin-right: 1.5rem;
+  }
+  
+  .button:hover {
+    width: 10rem; /* Limita o tamanho no hover para 10rem */
+    border-radius: 40px;
+    transition-duration: .3s;
+  }
+  
+  .button__icon {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .button__icon svg {
+    width: 1.5rem;
+  }
+  
+  .button__icon svg path {
+    fill: white;
+  }
+  
+  .button__text {
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 600;
+    transition-duration: .3s;
+  }
+  
+  .button:hover .button__icon {
+    width: 26%;
+    transition-duration: .3s;
+    padding-left: 10px;
+  }
+  
+  .button:hover .button__text {
+    opacity: 1;
+    width: 60%; /* Reduz a expansão do texto */
+    transition-duration: .3s;
+    padding-right: 1rem; /* Ajusta o espaçamento do texto */
+  }
+  
+  .button:active {
+    transform: translate(2px, 2px);
+  }
 /* Estilo serviços encaminhados */
 
 .container-servico-encaminhado{
-    height: 45%;
-    margin:2rem 1rem 0rem 1rem;
+    width: 100%;
+    height: 45vh;
+    margin:1rem 1.5rem 0rem 1rem;
+    overflow-y: scroll;
+}
+
+/* estilo da barra de rolagem */
+::-webkit-scrollbar {
+  background-color: transparent;
 }
 
 .container-servico-encaminhado h2{
     font-size: 2rem;
     color: var(--color01);
+    margin-left: 1rem;
 }
 
-.container-encaminhamento{
-    display: flex;
-    height: 100%;
+/* Para telas normais (padrão) */
+.container-encaminhamento {
+    display: grid;
+    text-align: center;
+    height: auto;
+    grid-template-columns: 1fr; /* Uma coluna */
+    gap: 1rem; /* Espaço entre os itens */
+    width: 100%;
+    justify-items: center;
+    
 }
+
+.container-encaminhamento h3{
+  color: white;
+  text-align: center;
+  grid-column: span 3;
+}
+
+.container-encaminhamento a{
+    text-decoration: none;
+    color: var(--color02);
+    width: 100%;
+    margin: 0rem 1rem 0rem 1rem;
+    
+}
+
 
 .servico-encaminhado{
     background-color: var(--color01);
-    height: 46%;
-    width: 45%;
-    margin: 0.5rem;
+    height: 100%;
+    width: 95%;
+    margin: 1rem 0rem 7rem 0rem;
     border-radius: 1rem;
     position: relative;
     display: flex;
+    flex-direction:column ;
     justify-content: center;
-    flex-direction: column-reverse;
+    align-items: center;
+    text-decoration: none;
+    border: solid 3px transparent;
+    transition: 0.3s ease-in-out;
+    gap: 0.5rem;
    
+}
+
+.servico-encaminhado:hover{
+ border: solid var(--color03) 3px;
 }
 
 .servico-encaminhado-local{
     text-align: center;
     font-size: 1.5rem;
     font-weight: bold;
-    padding-top: 2rem;
 
 }
 
@@ -180,6 +224,7 @@ hr{
     background-color: var(--color04);
     position: absolute;
     top: 0;
+    left: 0;
     z-index: 1;
     padding: 1rem 3rem;
     border-top-left-radius: 0.5rem;
@@ -187,7 +232,7 @@ hr{
     display: flex;
     gap: 0.5rem;
     font-size: 1.5rem ;
-    box-shadow: 2px 2px 8px var(--color02);
+    box-shadow: -1px 2px 8px var(--color02);
     
 }
 
@@ -195,34 +240,196 @@ hr{
     font-weight: bold;
 }
 
-/* Estilização rodapé "Fazer solicitação"*/
+.urgencia-encaminhado{
+    margin: 1rem;
+   font-size: 1.5rem;
+   padding: 0.5rem;
+    border: 0.2rem solid var(--colorRed);
+    border-radius: 3rem;
+}
 
-.container-footer{
+.urgencia,.urgencia-encaminhado{
+    text-transform: capitalize;
+}
+
+/* Estilo do css do man do site */
+.container-baixo{
     width: 100vw;
-    height: 12vh;
+    min-height: 80vh;
+    height: auto;
     background-color: var(--color06);
+    margin-bottom: 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    padding: 1.8rem;
+    box-shadow: 0 -4px 10px rgba(20, 23, 53, 0.3); 
+}
+.container_baixo-ladoEsquerdo,.container_baixo-ladoDireito{
+    min-height: 50%;
+    margin-top: 1rem;
+    padding: 1rem;
+}
+h2{
+    font-size: 1.8rem;
+    font-weight: bold;
     color: var(--color01);
-    text-align: center;
+}
+
+.ladoEsquerdo-conteudo{
+  color: white;
+  text-align: center;
+  grid-column: span 3;
+}
+
+hr{
+    margin-bottom: 2rem;
+}
+.destaque-txt{
+    color: var(--color03);
+}
+.ladoEsquerdo-card, .ladoDireito-card{
+    background: var(--color04);
+    height: 8rem;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 1.8rem;
+    gap: 0.5rem;
+}
+.card-conteudo{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-weight: 700;
+}
+.horario{
+    display: none;
+    padding-left: 1.4rem;
+}
+
+.bloco{
+  color: var(--color02);
+}
+
+.urgencia{
+    color: var(--color01);
+    background-color: var(--color05);
+    padding: 1rem;
+    border-radius: 1rem;
+}
+.fa-arrow-right:before {
+    content: "\f061";
+    color: var(--color06);
+    padding: 0.5rem;
+    border: 0.2rem solid var(--color06);
+    border-radius: 10rem;
+}
+.botao-chamado {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background-color: var(--color03);
+    color: #000;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 0.7rem 1rem; /* Padding inicial */
+    border-radius: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    text-decoration: none;
+    z-index: 1000;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Transições suaves */
+}
+/* From Uiverse.io by vinodjangid07 */ 
+.Btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 45px;
+    height: 45px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: fixed; /* Mudei para fixed */
+    bottom: 20px; /* Distância do fundo */
+    right: 20px; /* Distância da direita */
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color:var(--color03);
+    color: #000;
+    z-index: 1000; /* Garante que o botão fique sobre outros elementos */
+}
+
+  
+  /* plus sign */
+  .sign {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .sign svg {
+    width: 17px;
+  }
+  
+  .sign svg path {
+    fill: rgb(0, 0, 0);
+  }
+  /* text */
+  .text {
+    position: absolute;
+    right: 0%;
+    width: 0%;
+    opacity: 0;
+    color: rgb(0, 0, 0);
+    font-size: 1.2em;
+    font-weight: 600;
+    transition-duration: .3s;
+  }
+  /* hover effect on button width */
+  .Btn:hover {
+    width: 125px;
+    border-radius: 40px;
+    transition-duration: .3s;
+  }
+  
+  .Btn:hover .sign {
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 20px;
+  }
+  /* hover effect button's text */
+  .Btn:hover .text {
+    opacity: 1;
+    width: 70%;
+    transition-duration: .3s;
+    padding-right: 10px;
+  }
+  /* button click effect*/
+  .Btn:active {
+    transform: translate(2px ,2px);
+  }
+
+@media (min-width: 700px){
+  .container-encaminhamento {
+    grid-template-columns: 1fr 1fr; 
+   
     
 }
-
-.container-footer p{
-    padding: 0.5rem;
 }
 
-/* Estilo do btn-fazer-solicitacao */
-.btn-fazer-solicitacao{
-    border: var(--color03) solid 0.1rem;
-    border-radius: 5rem;
-    padding: 0.5rem 8rem 0.5rem 8rem;
-    background-color: rgba(0, 0, 0, 0.158);
-    color: var(--color03);
-    font-weight: bold;
-    transition-duration: 0.2s;
+@media (min-width: 1000px){
+  .container-encaminhamento {
+    grid-template-columns: 1fr 1fr 1fr; 
 }
-
-.btn-fazer-solicitacao:hover{
-    border: none;
-    background: var(--color03);
-    color: var(--color01);
 }

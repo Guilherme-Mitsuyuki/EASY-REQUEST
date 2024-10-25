@@ -1,6 +1,36 @@
 body{
     overflow-x: hidden;
 }
+
+.container-header_btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-header_btn-voltar{
+    margin: 1rem;
+    padding: 0.5rem;
+    width: 10rem;
+    border-color: var(--color02);
+    border-radius: 5rem;
+    background: none;
+    font-weight: 700;
+    
+    transition-duration: 0.2s;
+}
+
+.container-header_btn-voltar i{
+    margin-right: 0.5rem;
+ }
+
+ /* Mudança de Cor do botão ao passar o cursor por cima */
+.container-header_btn-voltar:hover{
+    border-color: none;
+    background-color: var(--color02);
+    color: var(--color01);
+}
+
 /* Cabeçalho */
 .cabecalho {
     width: 100vw;
@@ -29,6 +59,7 @@ body{
 
 .cabecalho__botao i {
     margin-right: 0.5rem;
+    
 }
 
 .cabecalho__botao--voltar:hover {
@@ -239,3 +270,90 @@ body{
         }
 }
 
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    overflow: auto; /* Ativar rolagem se necessário */
+    background-color: rgb(0,0,0); /* Cor de fundo */
+    background-color: rgba(0,0,0,0.4); /* Fundo preto com opacidade */
+}
+
+.modal__conteudo {
+    background-color: #fefefe;
+    margin: 15% auto; /* Margens automáticas para centralizar */
+    padding: 2rem;
+    border: 1px solid #888;
+    width: 80%; /* Largura do modal */
+}
+
+.modal__fechar {
+    color: #aaa;
+    float: right;
+    font-size: 2.8rem;
+    font-weight: bold;
+}
+
+.modal__fechar:hover,
+.modal__fechar:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+
+/* Estilos para o modal */
+.modal__conteudo {
+    background-color: #fff; /* Fundo branco */
+    border-radius: 0.8rem; /* Bordas arredondadas */
+    box-shadow: 0 0.4rem 2rem rgba(0, 0, 0, 0.1); /* Sombra suave */
+    padding: 2rem; /* Espaçamento interno */
+}
+/* Estilo para os títulos h2 */
+.modal__conteudo h2 {
+    font-family: 'Georgia', serif; /* Fonte clássica */
+    font-size: 2.4rem; /* Tamanho do texto */
+    color: #333; /* Cor escura */
+    margin-top: 1.5rem; /* Margem superior */
+    margin-bottom: 1rem; /* Margem inferior */
+    border-bottom: 0.2rem solid #eaeaea; /* Linha abaixo */
+    padding-bottom: 0.5rem; /* Espaçamento interno abaixo */
+    text-align: left;
+}
+
+/* Estilo para os subtítulos h3 */
+.modal__conteudo h3 {
+    font-family: 'Georgia', serif; /* Fonte clássica */
+    font-size: 2rem; /* Tamanho do texto */
+    color: #444; /* Cor um pouco mais clara */
+    margin-top: 1.5rem; /* Margem superior */
+    margin-bottom: 0.5rem; /* Margem inferior */
+    text-align: left;
+}
+
+/* Estilo para listas não ordenadas */
+.modal__conteudo ul {
+    list-style-type: disc; /* Marcadores em forma de disco */
+    margin-left: 2rem; /* Margem à esquerda */
+    color: #555; /* Cor do texto */
+    text-align: left;
+}
+.modal__conteudo p{
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+/* Estilo para itens da lista */
+.modal__conteudo ul li {
+    margin-bottom: 0.5rem; /* Espaçamento entre itens */
+    font-size: 1.4rem;
+}
+
+/* Estilo para separadores (hr) */
+.modal__conteudo hr {
+    border: 1px solid #eaeaea; /* Linha sutil */
+    margin: 20px 0; /* Margem vertical */
+}

@@ -1,28 +1,9 @@
-html, body {
-    overflow: hidden; /* Desabilita rolagem padrão em ambos os eixos */
-    height: 100%; /* Garante que o body ocupe toda a altura da página */
-}
-
-body {
-    position: relative; /* Para conter o conteúdo e trabalhar com o hack */
-    overflow-x: hidden; /* Remove a barra de rolagem horizontal */
-}
-
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: -1.5rem; /* Ajusta essa margem para controlar a largura invisível da rolagem */
-    width: 1.5rem; /* Largura da barra de rolagem invisível */
-    background: transparent; /* Mantém a área invisível */
-    overflow-y: scroll; /* Mantém a funcionalidade de rolagem */
-}
 
 /* Estilo do Cabeçalho */
 .cabecalho,
 .principal__container {
-    width: 100%;
+    width: 100vw;
+    
 }
 
 /* Container do Botão Voltar */
@@ -31,6 +12,7 @@ body::before {
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    height: 11vh;
 }
 
 .cabecalho__botao-voltar {
@@ -53,49 +35,26 @@ body::before {
     color: var(--color01);
 }
 
-/* Estilo da Seção de Informações do Usuário */
-.cabecalho__info-usuario {
-    height: 15vh;
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100vw;
-    padding-left: 4rem;
-}
-
-.cabecalho__imagem-usuario {
-    height: 7rem;
-    border-radius: 50%;
-    margin-right: 1.5rem;
-}
-
-.cabecalho__nome-usuario {
-    font-size: 2rem;
-}
-
-.cabecalho__cargo-usuario {
-    background-color: var(--color05);
-    color: var(--color01);
-    margin-right: 10rem;
-    text-align: center;
-    padding: 0.4rem;
-    border-radius: 5rem;
-}
-
 /* Container principal  main*/
 .principal__container {
     width: 100vw;
+    min-height: 79vh;
     height: auto;
     background-color: var(--color06);
     margin-bottom: 0;
     position: absolute;
     bottom: 0;
     left: 0;
-    border-top-left-radius: 7rem;
-    border-top-right-radius: 7rem;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
     padding: 1.5rem;
     display: flex;
     flex-direction: column;
+    max-height: calc(100vh - [altura do header]); /* Ajuste conforme necessário */
+    box-shadow: -7px 7px 16px black;
+    flex: 1; /* Permitir que o container principal ocupe o espaço restante */
+    overflow-y: auto; /* Habilitar rolagem vertical */
+    max-height: calc(100vh - 15vh);
 }
 
 /* Título principal */
@@ -208,7 +167,14 @@ body::before {
         padding: 1.1rem;
     }
 }
-/* --------------TRANSIÇÃO------------- */
-#cabecalho, #principal__container{
-    visibility: hidden;
+@media (max-width: 400px) {
+
+    html {
+        font-size: 67.5%; 
+        
+    }
+    .principal__container{
+        height: 60vh ;
+    }
+
 }

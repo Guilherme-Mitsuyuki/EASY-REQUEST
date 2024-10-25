@@ -10,9 +10,10 @@
     <link rel="stylesheet" href="/static/CSS/global.css">
     <!-- Link para o CSS específico desta página -->
     <link rel="stylesheet" href="/static/CSS/RF007-manutConfirm.css">
-    <script src="/static/JS/RF007-manutConfirm.js"></script>
-    <!-- link JS biblioteca scrollrevealjs -->
-    <script src="https://unpkg.com/scrollreveal"></script>
+    <!-- Scripts JavaScript: Carregamento dos arquivos de script da página -->
+    <script defer src="/static/JS/funcao-voltar.js"></script>
+    <!-- Biblioteca de ícones Font Awesome -->
+    <script src="https://kit.fontawesome.com/e9b74fb3c4.js" crossorigin="anonymous"></script>
     <!-- link JS biblioteca SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
@@ -23,19 +24,11 @@
     <!-- Cabeçalho com informações do usuário e botão de voltar -->
     <header class="cabecalho" id="cabecalho">
         <div class="cabecalho__botao-container">
-            <button class="cabecalho__botao-voltar" href=''>
+            <button class="cabecalho__botao-voltar" onclick="funcVoltar()">
                 <i class="fa-solid fa-arrow-left"></i>Voltar
             </button>
         </div>
 
-        <!-- Seção com os detalhes do usuário logado -->
-        <section class="cabecalho__info-usuario">
-            <img src="/static/IMG/image 17exImgRogerio.png" alt="Imagem de Perfil de Claudio Silva" class="cabecalho__imagem-usuario">
-            <div class="cabecalho__detalhes-usuario">
-                <h2 class="cabecalho__nome-usuario">João Vitor</h2>
-                <p class="cabecalho__cargo-usuario">Chefe de manutenção</p>
-            </div>
-        </section>
     </header>
 
     <!-- Conteúdo principal da página -->
@@ -45,26 +38,28 @@
             <p class="principal__titulo">Confirmar finalização de serviço</p>
             
             <!-- Formulário de finalização de tarefa -->
-            <form class="formulario-finalizar">
+
+            <form class="formulario-finalizar" action="/RF007" method="post">
+                <input type="hidden" name="id_solicitacao" value="{{campo_id_encaminhamento}}">
                 <!-- Opções de finalização da tarefa -->
                 <div class="formulario-finalizar__opcoes">
                     <p class="formulario-finalizar__titulo">Escolha uma das opções:</p>
 
                     <!-- Opção: Não foi possível realizar a tarefa -->
                     <label class="formulario-finalizar__opcao">
-                        <input type="radio" name="opcao" class="formulario-finalizar__input" />
+                        <input type="radio" name="opcao" value="pendente" class="formulario-finalizar__input" />
                         <span class="formulario-finalizar__texto">Não foi possível realizar a tarefa</span>
                     </label>
 
                     <!-- Opção: Foi realizado, mas necessita de outros cuidados -->
                     <label class="formulario-finalizar__opcao">
-                        <input type="radio" name="opcao" class="formulario-finalizar__input" />
+                        <input type="radio" name="opcao" value="realizado mas com pendencia" class="formulario-finalizar__input" />
                         <span class="formulario-finalizar__texto">Foi realizado mas necessita de outros cuidados</span>
                     </label>
 
                     <!-- Opção: Tarefa foi totalmente realizada -->
                     <label class="formulario-finalizar__opcao">
-                        <input type="radio" name="opcao" class="formulario-finalizar__input" />
+                        <input type="radio" name="opcao" value="realizado" class="formulario-finalizar__input" />
                         <span class="formulario-finalizar__texto">Tarefa foi totalmente realizada</span>
                     </label>
                 </div>
@@ -72,7 +67,7 @@
                 <!-- Caixa de texto para informações adicionais -->
                 <div class="formulario-finalizar__caixa-texto">
                     <p class="formulario-finalizar__titulo">Inserir informações adicionais (caso houver):</p>
-                    <textarea class="formulario-finalizar__comentarios" placeholder="Digite aqui"></textarea>
+                    <textarea name="adendo" class="formulario-finalizar__comentarios" placeholder="Digite aqui"></textarea>
                     <!-- Botão para finalizar a tarefa -->
                     <button type="submit" class="formulario-finalizar__botao">Finalizar tarefa</button>
                 </div>

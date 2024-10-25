@@ -5,7 +5,7 @@ CREATE DATABASE bd_easyrequest;
 USE bd_easyrequest;
 
 #Criar usuário para acessar o Banco de Dados
-CREATE USER 'equipe'@'%' IDENTIFIED BY '4_b4t@t45_3_m31@';
+CREATE USER 'equipe_easyrequest'@'%' IDENTIFIED BY '4_b4t@t45_3_m31@';
 GRANT ALL PRIVILEGES ON bd_easyrequest.* TO 'equipe'@'%' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 
@@ -37,7 +37,7 @@ CREATE TABLE tb_funcionarios (
  SN VARCHAR(9) NOT NULL,
  foto VARCHAR(2048),
  permissao VARCHAR(30) NOT NULL,
- id_funcao INT NOT NULL,
+ id_funcao INT,
  CONSTRAINT FK_funcionarios_funcao FOREIGN KEY (id_funcao) REFERENCES tb_funcoes (id_funcao)
 );
 
@@ -48,13 +48,15 @@ CREATE TABLE tb_solicitacoes (
  id_sala VARCHAR(10) NOT NULL,
  descricao VARCHAR(2048) NOT NULL,
  CPF_funcionario VARCHAR(14) NOT NULL,
+ foto VARCHAR(2048),
+ data_inicio DATETIME NOT NULL,
  CONSTRAINT FK_tb_solicitacoes_servicos FOREIGN KEY (id_servico) REFERENCES tb_servicos (id_servico),
  CONSTRAINT FK_tb_solicitacoes_sala FOREIGN KEY (id_sala) REFERENCES tb_salas (id_sala),
  CONSTRAINT FK_tb_solicitacoes_funcionario FOREIGN KEY (CPF_funcionario) REFERENCES tb_funcionarios (CPF_funcionario)
 );
 
 #Criar a tabela que armazena os serviços a serem realizados pelos técnicos
-CREATE TABLE tb_encaminhamento (
+CREATE TABLE tb_encaminhamentos (
  id_encaminhamento INT PRIMARY KEY AUTO_INCREMENT,
  CPF_funcionario VARCHAR(14) NOT NULL,
  id_solicitacao INT NOT NULL,
@@ -62,23 +64,27 @@ CREATE TABLE tb_encaminhamento (
  status VARCHAR(12) NOT NULL,
  status_final VARCHAR(255),
  adendo VARCHAR(2048),
+ status_finalizacao VARCHAR(255),
+ data_inicio_encaminhamento DATETIME NOT NULL,
+ data_inicio_servico DATETIME DEFAULT NULL,
+ data_termino_servico DATETIME DEFAULT NULL,
  CONSTRAINT FK_tb_encaminhamento_funcionario FOREIGN KEY (CPF_funcionario) REFERENCES tb_funcionarios (CPF_funcionario),
  CONSTRAINT FK_tb_encaminhamento_solicitacao FOREIGN KEY (id_solicitacao) REFERENCES tb_solicitacoes (id_solicitacao)
 );
 
-#Criar a tabela que armazena as Ordens de Serviço
-CREATE TABLE tb_ordens_de_servico (
- id_os INT PRIMARY KEY AUTO_INCREMENT,
+#Criar a tabela que armazena os relatórios finais
+CREATE TABLE tb_relatorios (
+ id_relatorio INT PRIMARY KEY AUTO_INCREMENT,
  id_encaminhamento INT NOT NULL,
- CONSTRAINT FK_tb_os_encaminhamento FOREIGN KEY (id_encaminhamento) REFERENCES tb_encaminhamento (id_encaminhamento)
+ CONSTRAINT FK_tb_os_encaminhamento FOREIGN KEY (id_encaminhamento) REFERENCES tb_encaminhamentos (id_encaminhamento)
 );
 
 INSERT INTO tb_funcoes (nome) VALUES ("Técnico de Manutenção"), ("Instrutor"), ("Secretaria"), ("OPP"), ("Coordenador"), ("Diretor"), ("Outros");
-INSERT INTO tb_servicos (nome) VALUES ("Elétrica"), ("Hidráulica"), ("Pintura"), ("Alvenaria");
+INSERT INTO tb_servicos (nome) VALUES ("Elétrica"), ("Hidráulica"), ("Pintura"), ("Alvenaria"), ("Maquinas");
 
 SELECT * FROM tb_funcoes;
 SELECT * FROM tb_funcionarios;
-SELECT * FROM tb_solicitacoes;
 SELECT * FROM tb_servicos;
 SELECT * FROM tb_salas;
-SELECT * FROM tb_encaminhamento;
+SELECT * FROM tb_solicitacoes;
+SELECT * FROM tb_encaminhamentos;

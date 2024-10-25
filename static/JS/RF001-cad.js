@@ -13,10 +13,59 @@ sr.reveal('#form-container', {
      // Define a distância que o elemento percorrerá (50px) ao surgir na tela   
     distance: '50px'   
 });
+// Função para o campo de CPF
+document.getElementById('cpf').addEventListener('input', function (e) {
+    let cpf = e.target.value.replace(/\D/g, ''); // Remove tudo que não for número
+    cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona o primeiro ponto
+    cpf = cpf.replace(/(\d{3})(\d)/, '$1.$2'); // Adiciona o segundo ponto
+    cpf = cpf.replace(/(\d{3})(\d{1,2})$/, '$1-$2'); // Adiciona o traço
 
+    e.target.value = cpf;
+});
 
+// Função para o campo de SN
+// Prefixo fixo
+const prefixo = "SN";
+const snInput = document.getElementById('sn');
 
-// Realização do cadastro
+// Adiciona o prefixo no campo quando o usuário clica no campo
+snInput.addEventListener('focus', function(){
+    if (snInput.value === '') {
+        snInput.value = prefixo;
+    }else{
+        return;
+    }
+})
+
+// Remove o prefixo no campo quando o usuário clica fora do campo
+snInput.addEventListener('blur', function(){
+    if (snInput.value === prefixo) {
+        snInput.value = '';
+    }else{
+        return;
+    }
+})
+
+// Adiciona o evento de input
+snInput.addEventListener('input', function() {
+    // Remove o prefixo para evitar duplicação
+    let value = snInput.value.replace(prefixo, '');
+    // Remove qualquer caractere que não seja número
+    value = value.replace(/\D/g, '');
+    // Limita a quantidade de números a 7
+    value = value.substring(0, 7);
+    // Atualiza o valor do input com o prefixo "SN" e os números digitados
+    snInput.value = prefixo + value;
+});
+
+// Bloqueia o usuário de deletar o prefixo "SN"
+snInput.addEventListener('keydown', function(e) {
+    // Previne que o usuário apague o prefixo
+    if (snInput.selectionStart < prefixo.length && (e.key === "Backspace" || e.key === "Delete")) {
+        e.preventDefault();
+    }
+});
+
 const cpf = document.getElementById('cpf');
 const nome = document.getElementById('nome');
 const email = document.getElementById('email');
@@ -27,30 +76,52 @@ const id_funcao = document.getElementById('funcao');
 var permissao = '';
 
 function cadastrar(){
-    var dados = {
-        cpf:cpf.value,
-        nome:nome.value,
-        email:email.value,
-        senha:senha.value,
-        sn:sn.value,
-        foto:foto.value,
-        id_funcao:parseInt(funcao.value)
+    if (cpf.value === '' || nome.value === '' || email.value === '' || senha.value === '' || sn.value === '' || id_funcao.value === '') {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Preencha todos os campos obrigatórios corretamente!",
+            showConfirmButton: false,
+            timer: 3500
+          });
+        return
+    }else if((senha.value).length < 6){
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "A senha deve ter pelo menos 6 caracteres",
+            showConfirmButton: false,
+            timer: 3500
+          });
+        return
     }
+
+    var dados = new FormData(); // Cria um novo FormData
+
+    // Adiciona os dados ao FormData
+    dados.append('cpf', cpf.value);
+    dados.append('nome', nome.value);
+    dados.append('email', email.value);
+    dados.append('senha', senha.value);
+    dados.append('sn', sn.value);
+    dados.append('foto', foto.files[0]); // Adiciona a foto
+    dados.append('id_funcao', parseInt(id_funcao.value)); // Adiciona id_funcao
 
     $.ajax({
         url: '/cadastrar-usuario',
         type: 'POST',
-        data: JSON.stringify(dados),
-        contentType: 'application/json',
+        data: dados,
+        contentType: false, // Importante para enviar arquivos
+        processData: false, // Não processar os dados
         success: function(){
-            if (parseInt(funcao.value) >= 2 && parseInt(funcao.value) <= 7){
+            if (parseInt(id_funcao.value) >= 2 && parseInt(id_funcao.value) <= 7){
                 permissao = 'solicitante';
             }
-            else if( parseInt(funcao.value) == 1){
+            else if( parseInt(id_funcao.value) == 1){
                 permissao = 'manutencao';
             }
 
-            console.log(parseInt(funcao.value))
+            console.log(parseInt(id_funcao.value))
             console.log(permissao);
 
 
@@ -59,55 +130,84 @@ function cadastrar(){
             }
 
             else if(permissao == 'solicitante'){
-                window.location.href = '/RF003';
+                window.location.href = '/tl-solicitante';
             }
 
         },
         error: function(){
-            swal ( "Oops!" ,  "O envio deu errado!" ,  "error" );
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Erro ao Cadastrar!",
+                showConfirmButton: false,
+                timer: 3500
+              });
         }
-    })
+    });
 }
 
-// cpf = request.form["cpf"]
-// nome = request.form["nome"]
-// email = request.form["email"]
-// senha = request.form["senha"]
-// sn = request.form["sn"]
-// foto = request.form["foto"]
-// id_funcao = int(request.form["funcao"])
+$(document).ready(function() {
+    const senhaInput = $('#senha');
+    const requisitos = {
+        minLength: false,
+        hasLetter: false,
+        hasNumber: false,
+        hasSpecialChar: false
+    };
 
-// ------------------------------------------------------
-// // Adiciona um evento para executar o código assim que o conteúdo do DOM estiver completamente carregado
-// document.addEventListener('DOMContentLoaded', function () {
+    const requisito1 = $('#requisito1');
+    const requisito2 = $('#requisito2');
+    const requisito3 = $('#requisito3');
+    const requisito4 = $('#requisito4');
+    const mensagem = $('#mensagem');
 
-//     // Seleciona o elemento de dropdown de seleção de profissão
-//     const profissao = document.querySelector('.form-container__select');
+    senhaInput.on('focus', function() {
+        $('#senha-requisitos').removeClass('hidden');
+    });
+
+    senhaInput.on('input', function() {
+        const senha = senhaInput.val();
+        requisitos.minLength = senha.length >= 6;
+        requisitos.hasLetter = /[a-zA-Z]/.test(senha);
+        requisitos.hasNumber = /\d/.test(senha);
+        requisitos.hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(senha);
+
+        // Atualiza os requisitos
+        requisito1.toggleClass('validado', requisitos.minLength);
+        requisito2.toggleClass('validado', requisitos.hasLetter);
+        requisito3.toggleClass('validado', requisitos.hasNumber);
+        requisito4.toggleClass('validado', requisitos.hasSpecialChar);
+
+        // Verifica se todos os requisitos foram atendidos
+        if (requisitos.minLength && requisitos.hasLetter && requisitos.hasNumber && requisitos.hasSpecialChar) {
+            // Limpa os outros textos e mostra apenas a mensagem de validação
+            requisito1.addClass('hidden');
+            requisito2.addClass('hidden');
+            requisito3.addClass('hidden');
+            requisito4.addClass('hidden');
+            mensagem.removeClass('hidden').text('Senha validada');
+        } else {
+            // Restaura os textos dos requisitos se a senha não for válida
+            mensagem.addClass('hidden');
+            requisito1.removeClass('hidden');
+            requisito2.removeClass('hidden');
+            requisito3.removeClass('hidden');
+            requisito4.removeClass('hidden');
+        }
+    });
+});
+
+document.getElementById('toggleSenha').addEventListener('click', function () {
+    const senhaInput = document.getElementById('senha');
+    const cadeadoIcone = document.getElementById('cadeadoIcone');
     
-//     // Seleciona as imagens para manutenção e solicitante
-//     const imgMan = document.querySelector('#img-man');
-//     const imgSoli = document.querySelector('#img-soli');
-
-//     // Função para atualizar a visibilidade das imagens com base na seleção do dropdown
-//     function updateImages() {
-//         // Obtém o valor selecionado no dropdown
-//         const selectedValue = profissao.value;
-
-//         // Mostra ambas as imagens inicialmente
-//         imgMan.classList.remove('hidden');
-//         imgSoli.classList.remove('hidden');
-
-//         // Oculta a imagem que não corresponde à seleção
-//         if (selectedValue === 'manutencao') {
-//             imgSoli.classList.add('hidden'); // Oculta a imagem do solicitante se "Manutenção" for selecionado
-//         } else if (selectedValue === 'solicitante') {
-//             imgMan.classList.add('hidden'); // Oculta a imagem da manutenção se "Solicitante" for selecionado
-//         }
-//     }
-
-//     // Inicializa a visibilidade das imagens com base na seleção inicial do dropdown
-//     updateImages();
-
-//     // Adiciona um evento que chama a função updateImages sempre que o valor do dropdown mudar
-//     profissao.addEventListener('change', updateImages);
-// });
+    if (senhaInput.type === 'password') {
+        senhaInput.type = 'text';
+        cadeadoIcone.src = '/static/IMG/olho-de-perto.png'; 
+        cadeadoIcone.alt = 'Ocultar senha';
+    } else {
+        senhaInput.type = 'password';
+        cadeadoIcone.src = '/static/IMG/fechar-o-olho.png'; 
+        cadeadoIcone.alt = 'Mostrar senha';
+    }
+});

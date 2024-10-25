@@ -35,21 +35,37 @@ document.addEventListener('DOMContentLoaded', function() {
 inputServico = document.getElementById('tipo-servico');
 inputBloco = document.getElementById('bloco');
 inputSalas = document.getElementById('sala');
-inputAdendo = document.getElementById('adendo');
+inputDescricao = document.getElementById('descricao');
+inputFoto = document.getElementById('arquivo');
 
 // Função que usa os dados do formulário para cadastrar uma solicitação
 function fazerSolicitacao() {
-    var dados = {
-        id_servico:inputServico.value,
-        id_sala:inputSalas.value,
-        descricao:inputAdendo.value
+
+    if (inputServico.value == '' || inputSalas == '0' || inputDescricao == '') {
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Você deve preencher todos os campos obrigatórios!",
+            showConfirmButton: false,
+            timer: 3500
+          });
+          return;
     }
+
+    var dados = new FormData(); // Cria um novo FormData
+
+    // Adiciona os dados ao FormData
+    dados.append('id_servico', inputServico.value);
+    dados.append('id_sala', inputSalas.value);
+    dados.append('descricao', inputDescricao.value);
+    dados.append('foto', inputFoto.files[0]); // Adiciona a foto
 
     $.ajax({
         url: '/fazer_solicitacao',
         type: 'POST',
-        data: JSON.stringify(dados),
-        contentType: 'application/json',
+        data: dados,
+        contentType: false, // Importante para enviar arquivos
+        processData: false, // Não processar os dados
         success: function(){
             Swal.fire({
                 position: "center",
@@ -58,10 +74,18 @@ function fazerSolicitacao() {
                 showConfirmButton: false,
                 timer: 1500
               });
-
+              setTimeout(() => {
+                window.location.href = '/RF003';
+            }, 1500);
         },
         error: function(){
-            swal ( "Oops!" ,  "O enviao deu errado!" ,  "error" );
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Erro ao fazer solicitação!",
+                showConfirmButton: false,
+                timer: 3500
+              });
         }
 
     })

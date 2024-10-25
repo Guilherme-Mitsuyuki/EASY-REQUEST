@@ -1,42 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-html, body {
-    overflow: hidden; /* Desabilita rolagem padrão em ambos os eixos */
-    height: 100%; /* Garante que o body ocupe toda a altura da página */
-}
-
+/* Tornar a barra de rolagem vertical transparente */
 body {
-    position: relative; /* Para conter o conteúdo e trabalhar com o hack */
-    overflow-x: hidden; /* Remove a barra de rolagem horizontal */
+    scrollbar-width: thin; /* Para navegadores como Firefox */
+    scrollbar-color: transparent transparent; /* Cor da barra e do trilho */
 }
 
-body::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: -1.5rem; /* Ajusta essa margem para controlar a largura invisível da rolagem */
-    width: 1.5rem; /* Largura da barra de rolagem invisível */
-    background: transparent; /* Mantém a área invisível */
-    overflow-y: scroll; /* Mantém a funcionalidade de rolagem */
+body::-webkit-scrollbar {
+    width: 8px; /* Defina a largura da barra de rolagem */
 }
 
+body::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0); /* Deixar transparente */
+}
+
+body::-webkit-scrollbar-track {
+    background-color: rgba(0, 0, 0, 0); /* Deixar o trilho transparente */
+}
 
 input,select{
     font-family: "Montserrat", sans-serif;
 }
 
-/* Estilo da Área do bnt-voltar e Data */
+/* Estilo do cabeçalho (btn voltar e informações do User) */
 .container-header{
     width: 100vw;
-    height: 5vh;
-    display: flex;
-    justify-content: space-between;
-}
-
-.container-header_btn{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 20vh;
 }
 
 .container-header_btn-voltar{
@@ -47,13 +35,12 @@ input,select{
     border-radius: 5rem;
     background: none;
     font-weight: 700;
-    
     transition-duration: 0.2s;
 }
 
 .container-header_btn-voltar i{
     margin-right: 0.5rem;
- }
+}
 
  /* Mudança de Cor do botão ao passar o cursor por cima */
 .container-header_btn-voltar:hover{
@@ -62,61 +49,19 @@ input,select{
     color: var(--color01);
 }
 
-/* Estilo da Data */
-.container-header_data{
-    margin: 1rem;
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.5rem;
-}
-
-.dia-semana{
-    color: var(--color05);
-    font-weight: 600;
-}
-
-/* Estilo da Área Usuario */
-.container-header-user{
-    width: 100vw;
-    height: 15vh;
-    display: flex;
-    align-items: center;
-    padding: 0rem 0rem 0rem 5rem;
-}
-
-.container-header-user img{
-    width: auto;
-    height: 5rem;
-    border-radius: 100%;
-}
-
-.container-header-user_nome{
-    font-size: 2rem;
-}
-
-.container-header-user_cargo{
-    background-color: var(--color05);
-    color: var(--color01);
-    margin-right: 10rem;
-    text-align: center;
-    padding: 0.4rem;
-    border-radius: 5rem;
-}
-
 /* Estilo da Área de Solicitação */
 .container-main{
     width: 100vw;
     height: 80vh;
+    overflow-y: auto;
     background-color: var(--color06);
     color: var(--color01);
     display: flex;
     align-items: center;
     flex-direction: column;
-    border-top-left-radius: 5rem;
-    border-top-right-radius: 5rem;
-
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    box-shadow: 0 -4px 8px rgba(20, 23, 53, 0.3);
 }
 
 .main-titulo-subtitulo{
@@ -156,7 +101,7 @@ input,select{
     display: flex;
     flex-direction: column;
     margin: 0.5rem;
-    gap: 4rem;
+    gap: 2.5rem;
 }
 
 .form_select select{
@@ -164,7 +109,7 @@ input,select{
     color: var(--color06);
     font-weight: 700;
     border: none;
-    padding: 0.2rem;
+    padding: 0.7rem;
     border-radius: 2rem;
 }
 
@@ -173,7 +118,7 @@ input,select{
     display: flex;
     flex-direction: column;
     text-align: left;
-    margin:  2rem 0.5rem 2rem 0.5rem;
+    margin-bottom: 2rem;
 }
 
 .form_input-arquivo label{
@@ -194,7 +139,7 @@ input,select{
     border: none;
 }
 
-.form_adendo{
+.form_descricao{
     display: flex;
     flex-direction: column;
     text-align: left;
@@ -202,15 +147,21 @@ input,select{
     color: var(--color04);
 }
 
-.form_adendo label{
+.form_descricao label{
     font-size: 1.5rem;
 }
 
-#adendo{
+#descricao{
     width: 100%;
-    height: 9rem;
+    height: 8rem;
     border-radius: 2rem;  
-    margin-top: 1rem;  
+    margin-top: 1rem;
+    padding: 1rem;
+    resize: none; /* Impede redimensionamento */
+}
+
+#descricao::-webkit-scrollbar {
+    display: none; /* Oculta a barra de rolagem */
 }
 
 /* Estilo do Botão "Enviar Solicitação" */
@@ -228,8 +179,7 @@ input,select{
     background-color: var(--color03); 
     border: 2px solid var(--color03); 
     color: var(--color01); 
-    margin-bottom: 1rem;
-    margin-top: 1.5rem;
+    margin: 0.5rem 0rem 1rem 0rem;
 }
 
 .form_btn-enviar:hover{
@@ -239,35 +189,45 @@ input,select{
     transform: scale(1.02); 
     border: 2px solid var(--color03);
 }
-
 /* ------------RESPONSIVIDADE------------------- */
+@media (min-width:376px) {
 
-
-
-@media (min-width:900px){
-    .container-main{
-        height:80vh ;
+    .container-main h1 {
+        font-size: 2.5rem;
     }
-
-    .form_select{
-        gap: 2rem;
-        display: flex;
-    }
-
-    .form_input-arquivo{
-        margin:  1rem 0.5rem 1rem 0.5rem;
-    }
-    
-    .form_btn-enviar{
-        display: inline-block;
-        width: 20rem;
-        padding: 0.5rem;
-        margin-bottom: 1rem;
-        margin-top: 1.5rem;
-    }
-   
 }
-/* -----------------------EFEITO DE TRANSIÇAÕ------------------ */
-#container-header,#container-header-user, #container-main{
-    visibility: hidden;
+
+@media(min-width:400px){
+  
+    .form_btn-enviar{
+        margin: 3rem 0rem 1rem 0rem;
+    }
+}
+
+@media(min-width:1000px){
+    .container-main h1 {
+        font-size: 4.6rem;
+    }
+    .subtitulo {
+        font-size: 2.1rem;
+    }
+    .container-main_form {
+        width: 55%;
+    }
+
+    .form_select select {
+       
+        font-size: 1.5rem;
+    }
+
+    .form_descricao label {
+        font-size: 1.6rem;
+    }
+
+    #descricao {
+        font-size: 1.5rem;
+    }
+    .form_btn-enviar {
+        margin: 2rem 0rem 1rem 0rem;
+    }
 }

@@ -5,10 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/CSS/global.css">
     <link rel="stylesheet" href="/static/CSS/RF004-ADMrecbSolic.css">
+    <!-- Scripts JavaScript: Carregamento dos arquivos de script da página -->
     <script defer src="/static/JS/funcao-data.js"></script>
     <script defer src = "/static/JS/funcao-horas.js"></script>
-    <!-- link JS biblioteca scrollrevealjs -->
-    <script src="https://unpkg.com/scrollreveal"></script>
+    <script defer src="/static/JS/RF004-ADMrecbSolic.js"></script>
+    <script defer src="/static/JS/barraPesquisa.js"></script>
+    <!-- Biblioteca de ícones do Font Awesome para uso de ícones na página -->
+    <script src="https://kit.fontawesome.com/e9b74fb3c4.js" crossorigin="anonymous"></script>
+    <!-- Biblioteca jQuery para facilitar o uso de Ajax e manipulação de DOM -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- link JS biblioteca SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <title>EASY-REQUEST - Inicial</title>
@@ -17,45 +22,23 @@
     <!-- Área de Informação do Usuário -->
     <header class="header">
         <!-- Container para a data e botão de menu -->
-        <div class="header__date-container" id="header__date-container">
-            <div class="header__button"></div>
-            <div class="horas">
-                <h2 class="saudacao" id="saudacao"></h2>
+        <div class="header__date-container">
+            <div class="header__button">
+                <button class="header_btn-voltar" onclick="funcVoltar()"><i class="fa-solid fa-arrow-left"></i>Voltar</button>
             </div>
-            <div class="header__date">
-                <!-- Dia da semana -->
-                <p class="header__day-of-week" aria-label="Dia da semana" id="dia-semana">Qui</p>
-                <!-- Dia do mês -->
-                <p class="header__day" aria-label="Dia do mês" id="dia">10</p>
-                <!-- Mês -->
-                <p class="header__month" aria-label="Mês" id="mes">Set</p>
-            </div>
-
         </div>
-        <!-- Informações do usuário logado -->
-        <section class="header__user-info" id="header__user-info">
-            <!-- Imagem de perfil do usuário com descrição acessível -->
-            <img src="/static/IMG/image 17exImgRogerio.png" alt="Imagem de Perfil de Claudio Silva" class="header__user-image">
-            <div class="header__user-details">
-                <!-- Nome do usuário -->
-                <h2 class="header__user-name">{{campo_nome}}</h2>
-                <!-- Cargo do usuário -->
-                <p class="header__user-position">{{campo_funcao}}</p>
-            </div>
-        </section>
     </header>
 
     <main>
         <!-- Área Inferior do site -->
-        <section class="sectionBaixo" id="sectionBaixo">
+        <section class="sectionBaixo">
+            <p  class="espacoP">Pesquisar por Tipo de Serviço:</p>
             <!-- Barra de Pesquisa -->
             <div class="sectionBaixo__search-container">
-                <!-- Campo de pesquisa com espaço para inserir texto -->
-                <input type="search" id="search" name="search" placeholder="Pesquisar..." class="sectionBaixo__search-input" aria-label="Campo de pesquisa">
-                <!-- Botão de pesquisa -->
+                <input type="search" id="search" name="search" placeholder="Pesquisar por tipo de serviço..." class="sectionBaixo__search-input" aria-label="Campo de pesquisa" oninput="filtrarServicos()">
                 <button type="submit" class="sectionBaixo__search-button" aria-label="Pesquisar">Pesquisar</button>
             </div>
-
+            <p class="espacoP">Filtrar por Bloco</p>
             <!-- Filtro -->
             <aside class="sectionBaixo__filter-container">
                 <!-- Selecionar filtro com descrição para leitores de tela -->
@@ -68,35 +51,8 @@
             </aside>
 
             <!-- Seção de Cards -->
-            <section class="sectionBaixo__grid-section">
-                {%for x in campo_recebimento%}
-                <article class="sectionBaixo__grid-item">
-                    <div class="card" id="card">
-                        <!-- Cabeçalho do card com localização do prédio -->
-                        <header class="card__header">
-                            <span class="card__building" aria-label="Localização do prédio">{{x[2]}} - {{x[1]}}</span>
-                        </header>
-                        <div class="card__body">
-                            <!-- Serviço descrito no card -->
-                            <p class="card__service" aria-label="Serviço">{{x[5]}}</p>
-                            <!-- Pessoa que fez a solicitação -->
-                            <p class="card__responsavel" aria-label="Responsável pela solicitação">{{x[4]}}</p>
-                            <!-- Linha horizontal para separação visual -->
-                            <hr class="card__linha" aria-hidden="true">
-                            <!-- Descrição do serviço -->
-                            <p class="card__descricao" aria-label="Descrição do serviço">
-                                {{x[3]}}
-                            </p>
-                        </div>
-                        <!-- Rodapé do card com botão de ação -->
+            <section class="sectionBaixo__grid-section" id="solicitacoes">
 
-                        <footer class="card__footer">
-                            <button class="card__button" aria-label="Encaminhar solicitação"><a href="/RF004A/{{x[0]}}">Detalhes</a></button>
-                        </footer>
-                    </div>
-
-                </article>
-                {%endfor%}
             </section>
         </section>
         <script src="/static/JS/RF004-ADMrecbSolic.js"></script>

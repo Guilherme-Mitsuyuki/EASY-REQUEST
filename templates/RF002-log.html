@@ -10,8 +10,10 @@
         <link rel="stylesheet" href="/static/CSS/global.css">
         <!-- Link Arquivo CSS -->
          <link rel="stylesheet" href="/static/CSS/RF002-log.css">
-          <!-- link JS biblioteca scrollrevealjs -->
-          <script src="https://unpkg.com/scrollreveal"></script>
+        <!-- Link Arquivo JS -->
+         <script defer src="/static/JS/RF002-log.js"></script>
+         <!-- Biblioteca jQuery para facilitar o uso de Ajax e manipulação de DOM -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
          <!-- link JS biblioteca SweetAlert -->
          <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
           <!-- Link Arquivo JS -->
@@ -23,15 +25,20 @@
             <section class="container-main" id="container-main">
             </section>
             <!-- Container para o Formulario de Login -->
-            <div class="container-form" id="container-form">
-                <form action="/RF002" method="POST">
+            <div class="container-form">
+                <div class="form">
                     <h1>Login</h1>
                     <label for="inp-SN">SN:</label>
                     <input placeholder="Digite seu SN" type="text" name="inp-SN" id="inp-SN" required>
                     <label for="inp-senha">Senha:</label>
-                    <input placeholder="Digite sua senha" type="password" name="inp-senha" id="inp-senha" required>
-                    <button type="submit" class="container-form__btn-envio">Concluir Login</button>
-                </form>
+                    <div class="senha-container">
+                        <input placeholder="Digite sua senha" type="password" name="inp-senha" id="inp-senha" required>
+                        <button type="button" id="toggleSenha" class="container-form__toggle-button">
+                            <img id="cadeadoIcone" src="/static/IMG/fechar-o-olho.png" alt="Mostrar senha" />
+                        </button>
+                    </div>
+                    <button onclick="logar()" class="container-form__btn-envio">Concluir Login</button>
+                </div>
             </div>
         </main>
         <footer>
