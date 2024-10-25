@@ -129,3 +129,27 @@ class Encaminhamento:
             return True
         except:
             return False
+        
+    
+    def mostrar_encaminhados(self):
+        myBD = Connection.conectar()
+
+        mycursor = myBD.cursor()
+
+        
+
+        mycursor.execute(f"SELECT s.id_sala, s.bloco, enc.urgencia, sol.id_solicitacao,func.nome, enc.id_encaminhamento FROM tb_funcionarios func , tb_encaminhamentos enc, tb_solicitacoes sol, tb_salas s WHERE enc.id_solicitacao = sol.id_solicitacao AND sol.id_sala = s.id_sala AND enc.status in ('à fazer','fazendo');")
+
+
+        mostrar_encaminhados = mycursor.fetchall()
+        
+        lista_encaminhado=[]
+        for encaminhado in mostrar_encaminhados:
+            lista_encaminhado.append({
+                "status":encaminhado[0],
+                "nome":encaminhado[1],
+                "id_sala":encaminhado[2],
+                "bloco":encaminhado[3],
+                
+            })
+        return  lista_encaminhado

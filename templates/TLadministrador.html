@@ -10,14 +10,15 @@
          <link rel="stylesheet" href="/static/CSS/global.css">
          <!-- Link Arquivo CSS -->
          <link rel="stylesheet" href="/static/CSS/TLadministrador.css">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
          <!-- Link Arquivo JS -->
          <script defer src="/static/JS/TLadministrador.js"></script>
          <!-- Link para os ICONS -->
         <script src="https://kit.fontawesome.com/e9b74fb3c4.js" crossorigin="anonymous"></script>
         <!-- link Arquivo JS data -->
-         <script defer src="/static/JS/funcao-data.js"></script>
          <script defer src = "/static/JS/funcao-horas.js"></script>
          <script defer src="/static/JS/tamanhoNome.js"></script>
+       
 
          <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=add" />
         <!-- link JS biblioteca SweetAlert -->
@@ -27,7 +28,7 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=add" />
     </head>
     <body>
-        <header>
+        <header >
             <section class="container-header-user">
                 <div class="info-usuario">
                     <figure><img src="{{ campo_foto if campo_foto else 'https://st4.depositphotos.com/11574170/25191/v/450/depositphotos_251916955-stock-illustration-user-glyph-color-icon.jpg' }}" alt="Foto de Perfil"></figure>
@@ -73,15 +74,8 @@
                     <h2>Serviços já<span class="destaque-txt"> Encaminhados</span></h2>
                     <hr>
                 </div>
-                <div class="ladoEsquerdo-conteudo">
-                    <div class="ladoEsquerdo-card">
-                        <p class="horario">| Pessoa responsavel</p>
-                        <div class="card-conteudo">
-                            <p class="bloco">Bloco A | sala 23</p>
-                            <p class="urgencia">Urgente</p>
-                            <a href=""><i class="fa-solid fa-arrow-right"></i></a>
-                        </div>
-                    </div>
+                <div class="ladoEsquerdo-conteudo" onclick="mostrar_encaminhados()" id="encaminhados">
+                    
                 </div>
             </section>
           
@@ -99,3 +93,7 @@
         </main>
     </body>
 </html>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        mostrar_encaminhados()})
+</script>

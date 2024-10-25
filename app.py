@@ -31,12 +31,18 @@ def pg_inicio(): # Função que renderiza a tela inicial
             return redirect("/RF003")
     else:
         return render_template("index.html")
-
+@app.route("/api/get/tl-administrador")
+def api_administrador():
+    encaminhados=Encaminhamento()
+    encaminhados=encaminhados.mostrar_encaminhados()
+    
+    return jsonify (encaminhados), 200
 # Criando a rota para a tela do administrador
 @app.route("/tl-administrador")
 def tl_administrador(): # Função que renderiza a tela do administrador
     funcao = session["usuario"]["funcao"]
     nome_completo = session["usuario"]["nome"]
+    foto = session["usuario"]["foto"]
 
     # Dividindo o nome em partes
     partes_nome = nome_completo.split()
@@ -48,8 +54,8 @@ def tl_administrador(): # Função que renderiza a tela do administrador
         # Caso o nome tenha apenas uma parte, retorna somente essa parte
         primeiro_ultimo_nome = partes_nome[0]
 
-    return render_template("TLadministrador.html", campo_nome = primeiro_ultimo_nome, campo_funcao = funcao)
 
+    return render_template("TLadministrador.html",campo_nome = primeiro_ultimo_nome, campo_funcao = funcao, campo_foto = foto)
 # Criando a rota para a tela do solicitante
 @app.route("/tl-solicitante")
 def tl_solicitante(): # Função que renderiza a tela do solicitante
