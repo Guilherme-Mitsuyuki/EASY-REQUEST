@@ -24,7 +24,7 @@ class Encaminhamento:
             status = 'à fazer'
             data_inicio_encaminhamento = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-            mycursor.execute(f"INSERT INTO tb_encaminhamentos (id_solicitacao, CPF_funcionario, urgencia, status, data_inicio_encaminhamento) VALUES ({id_solicitacao}, '{CPF_funcionario}', '{prioridade}', '{status}', '{data_inicio_encaminhamento}');")
+            mycursor.execute(f"INSERT INTO tb_encaminhamentos (id_solicitacao, CPF_funcionario, urgencia, status, status_finalizacao,data_inicio_encaminhamento) VALUES ({id_solicitacao}, '{CPF_funcionario}', '{prioridade}', '{status}', FALSE, '{data_inicio_encaminhamento}');")
 
             myBD.commit()
 
@@ -124,20 +124,53 @@ class Encaminhamento:
             myBD = Connection.conectar()
 
             mycursor = myBD.cursor()
+            data_termino_servico = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
-            mycursor.execute(f"UPDATE tb_encaminhamentos SET status = 'feito',status_final = '{opcao}',adendo = '{adendo}' WHERE id_encaminhamento = {id_encaminhamento};")
+            mycursor.execute(f"UPDATE tb_encaminhamentos SET status = 'feito', status_final = '{opcao}', adendo = '{adendo}', data_termino_servico = '{data_termino_servico}' WHERE id_encaminhamento = {id_encaminhamento};")
 
             myBD.commit()
 
             return True
         except:
             return False
-    
-    def criar_relatorio(self, id_encaminhamento):
+
+    def finalizacao_encaminhamento_supervisor(self, id_encaminhamento):
+        try:
+            myBD = Connection.conectar()
+
+            mycursor = myBD.cursor()
+            data_relatorio = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+
+            mycursor.execute(f"UPDATE tb_encaminhamentos SET status_finalizacao = TRUE WHERE id_encaminhamento = {id_encaminhamento};")
+
+            myBD.commit()
+
+            mycursor.execute(f"INSERT INTO tb_relatorios (id_encaminhamento, data_relatorio) VALUES ({id_encaminhamento}, '{data_relatorio}')")
+
+            myBD.commit()
+
+            return True
+        except:
+            return False
+
+    def dados_relatorio(self, id_encaminhamento):
+
         self.id_encaminhamento = id_encaminhamento
         
         myBD = Connection.conectar()
 
         mycursor = myBD.cursor()
-        
-        mycursor.execute(f"SELECT ")
+
+        mycursor.execute(f"""SELECT data_relatorio, sol.id_solicitacao, enc.id_encaminhamento, f1.nome, sol.CPF_funcionario, f1.email, 
+        sv.nome, sol.id_sala, s.bloco, sol.descricao, DATE_FORMAT(sol.data_inicio, '%d/%m/%Y'), TIME(sol.data_inicio), sol.foto, f2.nome,
+        enc.urgencia, DATE_FORMAT(enc.data_inicio_servico, '%d/%m/%Y'), TIME(enc.data_inicio_servico), 
+        DATE_FORMAT(enc.data_termino_servico, '%d/%m/%Y'), TIME(enc.data_termino_servico), enc.adendo FROM tb_relatorios, tb_solicitacoes sol,
+        tb_encaminhamentos enc, tb_funcionarios f1, tb_funcionarios f2, tb_servicos sv, tb_salas s WHERE sol.id_solicitacao = enc.id_solicitacao
+         AND f1.CPF_funcionario = sol.CPF_funcionario AND sv.id_servico = sol.id_servico AND s.id_sala = sol.id_sala AND 
+        f2.CPF_funcionario = sol.CPF_funcionario AND enc.id_encaminhamento = {id_encaminhamento};""")
+
+        dados_relatorio = mycursor.fetchone()
+
+        print(dados_relatorio)
+
+        return dados_relatorio

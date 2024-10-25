@@ -50,7 +50,7 @@
                     {{ campo_detalhes_encaminhamento[5] }}
                 </p>
                 <!-- Botão para encaminhar a solicitação, redirecionando para outra página -->
-                <a href="/RF005/{{campo_id_solicitacao}}"><button class="botao botao-cadastro">Finalizar</button></a>
+                <button class="botao botao-cadastro" onclick="finalizarEncaminhamento({{campo_id_encaminhamento}})">Finalizar</button>
             </div>
         </section>
     </main>

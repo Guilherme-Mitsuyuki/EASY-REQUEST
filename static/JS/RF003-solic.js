@@ -39,8 +39,8 @@ function fazerSolicitacao() {
                 icon: "success",
                 title: "Solicitação Enviada!",
                 showConfirmButton: false,
-                timer: 1500
-              });
+                timer: 1200
+            });
               setTimeout(() => {
                 window.location.href = '/RF003';
             }, 1500);

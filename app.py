@@ -444,13 +444,19 @@ def pg_fim_chamado():
 def pg_detalhes_finalizacao(id_encaminhamento):
     encaminhamento = Encaminhamento()
     detalhes_ecaminhamento = encaminhamento.mostrar_detalhes_encaminhamento(id_encaminhamento)
-    return render_template("RF008A-mais.html", campo_detalhes_encaminhamento = detalhes_ecaminhamento)
+    return render_template("RF008A-mais.html", campo_detalhes_encaminhamento = detalhes_ecaminhamento, campo_id_encaminhamento = id_encaminhamento)
+
+@app.route("/finalizacao-encaminhamento-supervisor/<id_encaminhamento>")
+def finalizacao_encaminhamento_supervisor(id_encaminhamento):
+    encaminhamento = Encaminhamento()
+    detalhes_encaminhamento = encaminhamento.mostrar_detalhes_encaminhamento(id_encaminhamento)
+    return render_template("RF008A-mais.html", campo_detalhes_encaminhamento = detalhes_encaminhamento)
 
 @app.route("/RF009/<id_encaminhamento>")
 def criar_relatorio(id_encaminhamento):
     encaminhamento = Encaminhamento()
-    info_relatorio = encaminhamento.criar_relatorio(id_encaminhamento)
-    return render_template("RF009-relatorio.html")
+    info_relatorio = encaminhamento.dados_relatorio(id_encaminhamento)
+    return jsonify(info_relatorio), 200
 
 # Criando rota para sair da conta
 @app.route("/logout")
