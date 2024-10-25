@@ -33,9 +33,15 @@
                 <p class="detalhes-solicitacao__texto-descricao">{{ campo_detalhes_encaminhamento[4] }}</p>
                 <p class="detalhes-solicitacao__rotulo-descricao">Observação do funcionario</p>
                 <p class="detalhes-solicitacao__texto-descricao">{{ campo_detalhes_encaminhamento[5] }}</p>
-                <a href="#" id="finalizar-btn" data-url="/RF005/{{campo_id_solicitacao}}">
-                    <button class="botao botao-cadastro">Finalizar</button>
-                </a>
+                <section class="container-btn">
+                    <a href="#" id="finalizar-btn" data-url="/RF005/{{campo_id_solicitacao}}">
+                        <button class="botao botao-cadastro">Finalizar</button>
+                    </a>
+                    <a href="#" id="finalizar-btn" data-url="/RF005/{{campo_id_solicitacao}}">
+                        <button class="botao botao-reencaminhar">Reencaminhar</button>
+                    </a>    
+                </section>
+                
             </div>
         </section>
     </main>
