@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
             icon: "success",
             showCancelButton: true,
             confirmButtonColor: "#04A61C",
-            cancelButtonColor: "#ED7203",
+            cancelButtonColor: "#6d8ce8",
             confirmButtonText: "Terminar",
             cancelButtonText: "Ver Relatório",
             customClass: {

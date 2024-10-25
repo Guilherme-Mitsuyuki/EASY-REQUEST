@@ -74,7 +74,7 @@ nav {
 }
 
 .detalhes-solicitacao__titulo {
-    font-size: 4rem;
+    font-size: 3rem;
     color: var(--color05);
     margin-bottom: 0.5rem;
     overflow-wrap: break-word; 
@@ -106,7 +106,7 @@ nav {
 .detalhes-solicitacao__rotulo-descricao {
     font-weight: bold;
     color: var(--color01);
-    font-size: 3rem;
+    font-size: 2rem;
     overflow-wrap: break-word; /* Quebra palavras longas */
 }
 
@@ -290,10 +290,10 @@ nav {
         gap: 2rem;
     }
     .detalhes-solicitacao__titulo, .detalhes-solicitacao__rotulo-descricao{
-        font-size: 2.5rem;
+        font-size: 2rem;
     }
     .detalhes-solicitacao__autor,.detalhes-solicitacao__texto-descricao {
-        font-size: 2rem;
+        font-size: 1.8rem;
     }
 
 }
