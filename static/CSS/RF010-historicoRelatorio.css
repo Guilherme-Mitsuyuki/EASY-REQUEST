@@ -241,14 +241,3 @@
     background-color: var(--color02);
     color: var(--color01);
 }
-.swal2-title {
-    font-size: 2rem; /* Tamanho do título */
-}
-
-.swal2-html {
-    font-size: 18px; /* Tamanho do texto */
-}
-
-.swal2-confirm, .swal2-cancel {
-    font-size: 16px; /* Tamanho dos botões */
-}
