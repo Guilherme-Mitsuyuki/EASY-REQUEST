@@ -92,7 +92,7 @@ nav{
 
 .caixa-opcao {
   max-height: 10rem;
-  padding: 1rem 4rem 1rem 1rem;
+  padding: 1rem 6rem 1rem 1rem;
   margin: 1rem 2rem 1rem 2rem;
   cursor: pointer;
   display: flex;
@@ -117,10 +117,11 @@ nav{
 }
 
 .caixa-opcao img{
-  width: auto;
-  height: 7rem;
-  padding: 0.5rem;
-  border-radius: 100%;
+    width: 6rem;
+    height: 6rem;
+    padding: 0.5rem;
+    border-radius: 100%;
+    object-fit: cover;
 }
 
 .opcao_user{
