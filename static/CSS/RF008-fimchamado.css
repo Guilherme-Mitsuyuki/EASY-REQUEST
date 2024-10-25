@@ -42,6 +42,13 @@ body{
     text-align: center;
 }
 
+.conteudo-principal_container{
+    background-color: var(--color06);
+    width: 100vw;
+    height: 5vh;
+    padding: 1.5rem;
+}
+
 .conteudo-principal__titulo {
     font-size: 3rem;
     color: var(--color05);
@@ -131,6 +138,7 @@ body{
     margin-bottom: 0.5rem;
     border-radius: 1rem;
     font-weight: bold;
+    text-transform: capitalize;
 }.galeria__tipo p{
     margin-bottom: 0.5rem;
 }
